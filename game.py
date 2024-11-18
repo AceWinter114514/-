@@ -79,16 +79,16 @@ def jc():
     for l in bList:
         if l.x >= 1000 or l.x <= -10:
             bList.remove(l)
-        if o.y >= 700 or o.y <= -10:
+        if l.y >= 700 or l.y <= -10:
             bupList.remove(o)
-    for o1 in bdownList:ssa
+    for o1 in bdownList:
         if o1.y >= 700 or o1.y <= -10:
             bdownList.remove(o1)
     for o2 in bossbList:
         if o2.x >= 1000 or o2.x <= -10:
             bossbList.remove(o2)
     for o3 in bossbleftList:
-        if o3.x >= 1000 or o2.x <= -10:
+        if o3.x >= 1000 or o3.x <= -10:
             bossbleftList.remove(o3)
     for l1 in bupList:
         if l1.y >= 700 or l1.y <= -10:
@@ -124,15 +124,23 @@ def update():
         if wm.y < 0:
             wm.y += 5
         if boss.x >960:
-            boss.x-=10
+            if bossHP  < 10000:
+                boss.x-=20
+            else:
+                boss.x-=10
+        if boss.x < 0:
+            if bossHP < 10000:
+                boss.x+=20
+            else:
+                boss.x+=10
         elif boss.x<0:
             if bossHP < 10000:
-                boss.x += 20
+                boss.x -= 20
             else:
-                boss.x += 10
+                boss.x -= 10
         if bossmove == 1:
             if bossHP < 10000:
-                boss.x += 20
+                boss.x -= 20
             else:
                 boss.x -= 10
         elif bossmove == 2:
@@ -142,9 +150,9 @@ def update():
                 boss.x += 10
         else:
             if bossHP < 10000:
-                boss.x += 20
+                boss.x -= 20
             else:
-                boss.x += 10
+                boss.x -= 10
         if bossHP <= 0:
             state = '成功'
         elif HP <= 0:
@@ -163,18 +171,18 @@ def collide():
     global HP
     for b in bList:
         if b.colliderect(boss) and wq == 2:
-            bossHP -= random.randint(1,10)
+            bossHP -= random.randint(10,30)
         elif b.colliderect(boss) and wq == 1:
-            bossHP -= random.randint(6,25)
+            bossHP -= random.randint(20,55)
     for bup2 in bupList:
         if bup2.colliderect(boss):
-            bossHP -= random.randint(1,10)
+            bossHP -= random.randint(10,30)
     for bdown2 in bdownList:
         if bdown2.colliderect(boss):
-            bossHP -= random.randint(1,10)
+            bossHP -= random.randint(10,30)
     for bleft2 in bleftList:
         if bleft2.colliderect(boss):
-            bossHP -= random.randint(1,10)
+            bossHP -= random.randint(10,30)
     for a1 in bossbList:
         if wm.colliderect(a1):
             HP -= random.randint(30,150)
